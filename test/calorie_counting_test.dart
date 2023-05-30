@@ -48,7 +48,7 @@ void main() {
   });
   
   group('Puzzle 2:', () {
-    test('Eliminar la suma maxima', () {
+    test('Guardar la suma maxima', () {
       // siguiente valor = 69796
       var x = leerFile();
       
@@ -63,6 +63,51 @@ void main() {
 
       expect(69836, listaDeLosTresMaxElfos.elementAt(0));
     });
+    
+    test('Obtener las 3 sumas maximas', () {
+      // 3 max = 69836, 69796, 68336
+      var x = leerFile();
+      
+      String valores = x.toString();
+      List lista = valores.split(', ,');
+
+      List listaSumas = sumarConjuntos(lista);
+      
+      List listaDeLosTresMaxElfos = [];
+      listaDeLosTresMaxElfos.add(listaSumas.reduce((curr, next) => curr > next? curr: next));
+      listaSumas.remove(listaSumas.reduce((curr, next) => curr > next? curr: next));
+
+      listaDeLosTresMaxElfos.add(listaSumas.reduce((curr, next) => curr > next? curr: next));
+      listaSumas.remove(listaSumas.reduce((curr, next) => curr > next? curr: next));
+
+      listaDeLosTresMaxElfos.add(listaSumas.reduce((curr, next) => curr > next? curr: next));
+      listaSumas.remove(listaSumas.reduce((curr, next) => curr > next? curr: next));
+
+      expect([69836, 69796, 68336], listaDeLosTresMaxElfos);
+    });
+    test('Obtener las suma de los 3 maximos', () {
+      // 207968
+      var x = leerFile();
+      
+      String valores = x.toString();
+      List lista = valores.split(', ,');
+
+      List listaSumas = sumarConjuntos(lista);
+      
+      List<int> listaDeLosTresMaxElfos = [];
+      listaDeLosTresMaxElfos.add(listaSumas.reduce((curr, next) => curr > next? curr: next));
+      listaSumas.remove(listaSumas.reduce((curr, next) => curr > next? curr: next));
+
+      listaDeLosTresMaxElfos.add(listaSumas.reduce((curr, next) => curr > next? curr: next));
+      listaSumas.remove(listaSumas.reduce((curr, next) => curr > next? curr: next));
+
+      listaDeLosTresMaxElfos.add(listaSumas.reduce((curr, next) => curr > next? curr: next));
+      listaSumas.remove(listaSumas.reduce((curr, next) => curr > next? curr: next));
+
+      expect(207968, sumarElementosLista(listaDeLosTresMaxElfos));
+    });
+  
+  
   });
 
 }

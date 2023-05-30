@@ -19,6 +19,14 @@ sumarConjuntos(List<dynamic> lista) {
   return listaSumas;
 }
 
+sumarElementosLista(List<int> lista){
+  int a = 0;
+    for (var element in lista) {
+      a += element;
+    }
+    return a;
+}
+
 leerFile(){
   return File("C:/Users/M1-MQ3/Documents/Dart_Proyects/examen_calorias/calorie_counting/puzzle_1.txt").readAsLinesSync();
 }
