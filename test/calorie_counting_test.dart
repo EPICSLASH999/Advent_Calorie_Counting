@@ -57,13 +57,10 @@ void main() {
 
       List listaSumas = sumarConjuntos(lista);
       
-      List listaDeLosTresMaxElfos = [];
-      listaDeLosTresMaxElfos.add(listaSumas.reduce((curr, next) => curr > next? curr: next));
-      listaSumas.remove(listaSumas.reduce((curr, next) => curr > next? curr: next));
+      List<int> listaDeLosTresMaxElfos = obtenerLasMayoresCantidades(1, listaSumas);
 
       expect(69836, listaDeLosTresMaxElfos.elementAt(0));
     });
-    
     test('Obtener las 3 sumas maximas', () {
       // 3 max = 69836, 69796, 68336
       var x = leerFile();
@@ -73,15 +70,7 @@ void main() {
 
       List listaSumas = sumarConjuntos(lista);
       
-      List listaDeLosTresMaxElfos = [];
-      listaDeLosTresMaxElfos.add(listaSumas.reduce((curr, next) => curr > next? curr: next));
-      listaSumas.remove(listaSumas.reduce((curr, next) => curr > next? curr: next));
-
-      listaDeLosTresMaxElfos.add(listaSumas.reduce((curr, next) => curr > next? curr: next));
-      listaSumas.remove(listaSumas.reduce((curr, next) => curr > next? curr: next));
-
-      listaDeLosTresMaxElfos.add(listaSumas.reduce((curr, next) => curr > next? curr: next));
-      listaSumas.remove(listaSumas.reduce((curr, next) => curr > next? curr: next));
+      List<int> listaDeLosTresMaxElfos = obtenerLasMayoresCantidades(3, listaSumas);
 
       expect([69836, 69796, 68336], listaDeLosTresMaxElfos);
     });
@@ -94,15 +83,7 @@ void main() {
 
       List listaSumas = sumarConjuntos(lista);
       
-      List<int> listaDeLosTresMaxElfos = [];
-      listaDeLosTresMaxElfos.add(listaSumas.reduce((curr, next) => curr > next? curr: next));
-      listaSumas.remove(listaSumas.reduce((curr, next) => curr > next? curr: next));
-
-      listaDeLosTresMaxElfos.add(listaSumas.reduce((curr, next) => curr > next? curr: next));
-      listaSumas.remove(listaSumas.reduce((curr, next) => curr > next? curr: next));
-
-      listaDeLosTresMaxElfos.add(listaSumas.reduce((curr, next) => curr > next? curr: next));
-      listaSumas.remove(listaSumas.reduce((curr, next) => curr > next? curr: next));
+      List<int> listaDeLosTresMaxElfos = obtenerLasMayoresCantidades(3, listaSumas);
 
       expect(207968, sumarElementosLista(listaDeLosTresMaxElfos));
     });
@@ -111,3 +92,5 @@ void main() {
   });
 
 }
+
+

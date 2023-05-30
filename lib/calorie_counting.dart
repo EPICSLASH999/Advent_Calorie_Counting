@@ -1,5 +1,8 @@
-
 import 'dart:io';
+
+leerFile(){
+  return File("C:/Users/M1-MQ3/Documents/Dart_Proyects/examen_calorias/calorie_counting/puzzle_1.txt").readAsLinesSync();
+}
 
 sumarConjuntos(List<dynamic> lista) {
   List listaSumas = [];
@@ -27,7 +30,14 @@ sumarElementosLista(List<int> lista){
     return a;
 }
 
-leerFile(){
-  return File("C:/Users/M1-MQ3/Documents/Dart_Proyects/examen_calorias/calorie_counting/puzzle_1.txt").readAsLinesSync();
-}
 
+
+obtenerLasMayoresCantidades(int elementos, List<dynamic> listaSumas) {
+  List<int> listaDeLosTresMaxElfos = [];
+
+  for (var i = 0; i < elementos; i++) {
+    listaDeLosTresMaxElfos.add(listaSumas.reduce((curr, next) => curr > next? curr: next));
+    listaSumas.remove(listaSumas.reduce((curr, next) => curr > next? curr: next));
+  }
+  return listaDeLosTresMaxElfos;
+}
