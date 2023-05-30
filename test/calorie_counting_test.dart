@@ -7,7 +7,19 @@ void main() {
   test('Leer primera linea de .txt', () {
 
     var x = leerFile();
-    print(x);
+    
+    //print(x);
+  });
+  test('Leer solo el primer conjunto', () {
+    var x = leerFile();
+    
+    String valores = x.toString();
+    var lista = valores.split(', ,');
+    
+    String n = lista.elementAt(0);
+    n = n.replaceAll(' ', '');
+    var lista2 = n.split(',');
+    print(lista2);
   });
 }
 
