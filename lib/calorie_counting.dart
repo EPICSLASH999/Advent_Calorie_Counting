@@ -1,54 +1,71 @@
 import 'dart:io';
 
-leerFile(){
-  return File("C:/Users/M1-MQ3/Documents/Dart_Proyects/examen_calorias/calorie_counting/puzzle_1.txt").readAsLinesSync();
+leerFile(String path) => File(path).readAsLinesSync();
+
+List<String> obtenerListaConjuntosDeFile(file) {
+  String fileString = file.toString();
+  fileString = limpiarLista(fileString);
+  var listaConjuntos = fileString.split(', ,');
   
+  return listaConjuntos;
 }
+String limpiarLista(String listaString) {
+  listaString = listaString.replaceAll('[', '');
+  listaString = listaString.replaceAll(']', '');
+  return listaString;
+}
+
 
 sumarConjuntos(List<dynamic> lista) {
-  List listaSumas = [];
+  List listaSumasDeConjuntos = [];
   for (var i = 0; i < lista.length; i++) {
-    String n = lista.elementAt(i);
+    String conjuntoString = lista.elementAt(i);
     
-    n = limpiarLista(n);
-    List lista2 = n.split(',');
+    conjuntoString = eliminarEspacios(conjuntoString);
+    List listaConjunto = conjuntoString.split(',');
   
-    listaSumas.add(sumarElementosListaString(lista2));
+    listaSumasDeConjuntos.add(sumarElementosLista(listaConjunto));
   }
-  return listaSumas;
+  return listaSumasDeConjuntos;
 }
-String limpiarLista(String n) {
-  n = n.replaceAll(' ', '');
-  n = n.replaceAll('[', '');
-  n = n.replaceAll(']', '');
-  return n;
+String eliminarEspacios(String listaString) {
+  listaString = listaString.replaceAll(' ', '');
+  return listaString;
 }
 
-int sumarElementosListaString(List<dynamic> lista2) {
-  int a = 0;
-  for (var element in lista2) {
-    a += int.parse(element);
-  }
-  return a;
-}
-
-
-sumarElementosLista(List<int> lista){
+sumarElementosLista(List<dynamic> lista){
   int a = 0;
     for (var element in lista) {
-      a += element;
+      a += ((element is int)? element : int.parse(element.toString()));
     }
     return a;
 }
-
-
 
 obtenerLasMayoresCantidades(int elementos, List<dynamic> listaSumas) {
   List<int> listaDeLosTresMaxElfos = [];
 
   for (var i = 0; i < elementos; i++) {
-    listaDeLosTresMaxElfos.add(listaSumas.reduce((curr, next) => curr > next? curr: next));
-    listaSumas.remove(listaSumas.reduce((curr, next) => curr > next? curr: next));
+    var valorMaximoActual = listaSumas.reduce((curr, next) => curr > next? curr: next);
+    listaDeLosTresMaxElfos.add(valorMaximoActual);
+    listaSumas.remove(valorMaximoActual);
   }
   return listaDeLosTresMaxElfos;
+}
+
+
+int obtenerSumaDelMayorConjuntoAPartirDeFile(file) {
+  
+  List<String> listaConjuntos = obtenerListaConjuntosDeFile(file);
+  
+  List listaSumasDeConjuntos = sumarConjuntos(listaConjuntos);
+  List listaResultante = obtenerLasMayoresCantidades(1, listaSumasDeConjuntos);
+  return listaResultante.elementAt(0);
+}
+int obtenerSumaDeLosTresMayoresConjuntosAPartirDeFile(file) {
+  List<String> listaConjuntos = obtenerListaConjuntosDeFile(file);
+  List listaSumasDeConjuntos = sumarConjuntos(listaConjuntos);
+  List<int> listaDeLosTresMaxElfos = obtenerLasMayoresCantidades(3, listaSumasDeConjuntos);
+  int sumaDeLosTresMaximos = sumarElementosLista(listaDeLosTresMaxElfos);
+  
+  return sumaDeLosTresMaximos;
 }
