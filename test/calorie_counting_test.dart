@@ -12,7 +12,7 @@ void main() {
       var file = leerFile(path);
       
       List listaConjuntos = obtenerListaConjuntosDeFile(file);
-      List conjunto1 = eliminarEspacios(listaConjuntos.elementAt(0)).split(',');
+      List conjunto1 = listaConjuntos.elementAt(0).split(',');
 
       List listaEsperada = ['9057', '8878', '2753', '7027', '3880', '7154', '8022', '6710', '5721'];
       expect(conjunto1, listaEsperada);

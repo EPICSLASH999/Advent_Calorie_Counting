@@ -5,13 +5,14 @@ leerFile(String path) => File(path).readAsLinesSync();
 List<String> obtenerListaConjuntosDeFile(file) {
   String fileString = file.toString();
   fileString = limpiarLista(fileString);
-  var listaConjuntos = fileString.split(', ,');
+  var listaConjuntos = fileString.split(',,');
   
   return listaConjuntos;
 }
 String limpiarLista(String listaString) {
   listaString = listaString.replaceAll('[', '');
   listaString = listaString.replaceAll(']', '');
+  listaString = listaString.replaceAll(' ', '');
   return listaString;
 }
 
@@ -21,16 +22,11 @@ sumarConjuntos(List<dynamic> lista) {
   for (var i = 0; i < lista.length; i++) {
     String conjuntoString = lista.elementAt(i);
     
-    conjuntoString = eliminarEspacios(conjuntoString);
     List listaConjunto = conjuntoString.split(',');
   
     listaSumasDeConjuntos.add(sumarElementosLista(listaConjunto));
   }
   return listaSumasDeConjuntos;
-}
-String eliminarEspacios(String listaString) {
-  listaString = listaString.replaceAll(' ', '');
-  return listaString;
 }
 
 sumarElementosLista(List<dynamic> lista){
@@ -66,6 +62,6 @@ int obtenerSumaDeLosTresMayoresConjuntosAPartirDeFile(file) {
   List listaSumasDeConjuntos = sumarConjuntos(listaConjuntos);
   List<int> listaDeLosTresMaxElfos = obtenerLasMayoresCantidades(3, listaSumasDeConjuntos);
   int sumaDeLosTresMaximos = sumarElementosLista(listaDeLosTresMaxElfos);
-  
+
   return sumaDeLosTresMaximos;
 }
